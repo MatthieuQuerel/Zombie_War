@@ -68,10 +68,17 @@ public class ReadmeEditor : Editor
 
     static void LoadLayout()
     {
-        var assembly = typeof(EditorApplication).Assembly;
-        var windowLayoutType = assembly.GetType("UnityEditor.WindowLayout", true);
-        var method = windowLayoutType.GetMethod("LoadWindowLayout", BindingFlags.Public | BindingFlags.Static);
-        method.Invoke(null, new object[] { Path.Combine(Application.dataPath, "TutorialInfo/Layout.wlt"), false });
+    
+        //var method = windowLayoutType.GetMethod("LoadWindowLayout", BindingFlags.Public | BindingFlags.Static);
+       // method.Invoke(null, new object[] { Path.Combine(Application.dataPath, "TutorialInfo/Layout.wlt"), false });
+    var assembly = typeof(EditorApplication).Assembly;
+    var windowLayoutType = assembly.GetType("UnityEditor.WindowLayout", true);
+    var method = windowLayoutType.GetMethod("LoadWindowLayout", BindingFlags.Public | BindingFlags.Static);
+    
+    // Correction ici : On utilise le nom complet System.IO.Path
+    string layoutPath = System.IO.Path.Combine(Application.dataPath, "TutorialInfo/Layout.wlt");
+    
+    method.Invoke(null, new object[] { layoutPath, false });
     }
 
     static Readme SelectReadme()
