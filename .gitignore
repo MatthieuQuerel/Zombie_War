@@ -1,14 +1,44 @@
 
-Library/
-Temp/
-Obj/
-Build/
-Builds/
-Logs/
-MemoryCaptures/
+# Library/
+# Temp/
+# Obj/
+# Build/
+# Builds/
+# Logs/
+# MemoryCaptures/
 
 
-.vs/
+# .vs/
+# *.csproj
+# *.unityproj
+# *.sln
+# *.suo
+# *.tmp
+# *.user
+# *.userprefs
+# *.pidb
+# *.booproj
+# *.svd
+
+# .DS_Store
+# Thumbs.db
+# desktop.ini
+
+# Packages/*
+# !/Packages/manifest.json
+# !/Packages/packages-lock.json
+
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+/[Aa]ssets/AssetStoreTools*
+
+
 *.csproj
 *.unityproj
 *.sln
@@ -19,11 +49,38 @@ MemoryCaptures/
 *.pidb
 *.booproj
 *.svd
+*.pdb
+*.opendb
+.VC.db
+
 
 .DS_Store
+.DSStore?
+.
 Thumbs.db
 desktop.ini
 
-Packages/*
+On ignore le contenu mais on garde impérativement les fichiers de config
+/Packages/*
 !/Packages/manifest.json
 !/Packages/packages-lock.json
+
+
+/ProjectSettings/*
+!/ProjectSettings/ProjectSettings.asset
+!/ProjectSettings/ProjectVersion.txt
+!/ProjectSettings/TagManager.asset
+!/ProjectSettings/EditorBuildSettings.asset
+!/ProjectSettings/InputManager.asset
+!/ProjectSettings/NavMeshAreas.asset
+!/ProjectSettings/GraphicsSettings.asset
+!/ProjectSettings/QualitySettings.asset
+!/ProjectSettings/TimeManager.asset
+!/ProjectSettings/DynamicsManager.asset
+!/ProjectSettings/EditorSettings.asset
+!/ProjectSettings/ClusterInputManager.asset
+!/ProjectSettings/AudioManager.asset
+!/ProjectSettings/UnityAdsSettings.asset
+!/ProjectSettings/PresetManager.asset
+!/ProjectSettings/VFXManager.asset
+!/ProjectSettings/XRSettings.asset
