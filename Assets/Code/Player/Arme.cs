@@ -37,10 +37,14 @@ public class Arme : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
            
-            Renderer targetRenderer = hit.transform.GetComponent<Renderer>();
+            Renderer targetRenderer = hit.transform.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {
-                targetRenderer.material.color = Color.red;
+                ZombieAI zombie = hit.collider.GetComponent<ZombieAI>();
+                if (zombie != null)
+                {
+                    zombie.killZombie();
+                }
             }
         }
     }
