@@ -15,24 +15,24 @@ public class Player : MonoBehaviour
     //     }
     // }
 
-    private void OnTriggerEnter(Collider other)
-    { 
-        // Vérifie si c'est un zombie qui touche le joueur
-        ZombieAI zombie = other.GetComponentInParent<ZombieAI>();
-        UnityEngine.Debug.Log("Le joueur a pas été touché !");
+    // private void OnTriggerEnter(Collider other)
+    // { 
+    //     // Vérifie si c'est un zombie qui touche le joueur
+    //     ZombieAI zombie = other.GetComponentInParent<ZombieAI>();
+    //     // UnityEngine.Debug.Log("Le joueur a pas été touché !");
         
-        UnityEngine.Debug.Log(zombie);
-        if (zombie != null)
-        {
-            UnityEngine.Debug.Log("Le joueur a été touché par un zombie !");
-            Degats(1);
-        }
-    }
+    //     // // UnityEngine.Debug.Log(zombie);
+    //     if (zombie != null)
+    //     {
+    //         // UnityEngine.Debug.Log("Le joueur a été touché par un zombie !");
+    //         Degats(1);
+    //     }
+    // }
 
     public void Degats(int points)
     {
         lifePlayer -= points;
-        UnityEngine.Debug.Log(lifePlayer);
+        // UnityEngine.Debug.Log(lifePlayer);
 
         if (lifePlayer <= 0)
         {
