@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 579a34b2588db994195ab3018430c993
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 341926
+  packageName: Unity Building Block - Leaderboards
+  packageVersion: 1.1
+  assetPath: Assets/CloudCode/GeneratedModuleBindings/Unity.Services.CloudCode.GeneratedBindings.asmdef
+  uploadId: 819762

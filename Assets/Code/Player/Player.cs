@@ -3,16 +3,23 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public float lifePlayer = 3;
-    
-    public GameObject GameOver; 
+    public GameObject tabScore; 
+    private bool isVisible = false;
+    public GameObject GameOver;
 
-    // void Update()
-    // {    
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         Degats(1); 
-    //     }
-    // }
+
+    void Start()
+    {
+        tabScore.SetActive(false);
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleTabScore();
+        }
+    
+    }
 
     private void OnTriggerEnter(Collider other)
     { 
@@ -41,7 +48,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
 
     }
-    
+
     public void RestartGame()
     {
         Time.timeScale = 1f;
@@ -49,5 +56,10 @@ public class Player : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         SceneManager.LoadScene(currentSceneName);
+    }
+   void ToggleTabScore()
+    {
+        isVisible = !isVisible; 
+        tabScore.SetActive(isVisible);
     }
 }
