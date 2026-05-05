@@ -1,6 +1,7 @@
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class ZombieAI : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ZombieAI : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
+        if (player != null && agent.enabled)
         {
             agent.SetDestination(player.position);
             
@@ -36,9 +37,28 @@ public class ZombieAI : MonoBehaviour
         LifeZombie -= 1f;
         if (LifeZombie <= 0f)
         {
-            Destroy(gameObject);
+            // Stop le mouv
+            agent.enabled = false;
+            
+            // Désactive les colliders pour éviter les interactions
+            Collider[] colliders = GetComponents<Collider>();
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
+            
+            anim.SetTrigger("Death");
+            
+            // Kill zombie après 3s
+            StartCoroutine(DestroyAfterAnimation(3f));
             return true;
         }
         return false;
+    }
+
+    IEnumerator DestroyAfterAnimation(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }

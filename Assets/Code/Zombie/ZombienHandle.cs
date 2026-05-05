@@ -8,16 +8,15 @@ public class ZombieHandler : MonoBehaviour
     private float lastAttackTime = 0f;
     private float attackCooldown = 4f; 
 
-    private Animator anim; 
+    private Animator anim;
+    private bool isAttacking = false; 
 
 
     void Start()
     {
-        // Animator du parent zombie
         anim = GetComponentInParent<Animator>();
     }
 
-    // Détecte quand le zombie touche le player
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -31,43 +30,38 @@ public class ZombieHandler : MonoBehaviour
             }
         }
     }
-
-    // Détecte quand le zombie reste en contact avec le player
     void OnTriggerStay(Collider other)
     {
         
-        if (other.CompareTag("Player") && Time.time >= lastAttackTime + attackCooldown)
+        if (other.CompareTag("Player") && Time.time >= lastAttackTime + attackCooldown && !isAttacking)
         {
             var playerScript = other.GetComponent<Player>(); 
             if (playerScript != null)
             {
-                // UnityEngine.Debug.Log(playerScript);
-                // playerScript.toucherParZombie(other);
+                UnityEngine.Debug.Log($"[{gameObject.name}] Lancement attaque!");
                 StartCoroutine(AttaqueSynchronisee(playerScript));
-
-                if (anim != null)
-                {
-                    anim.SetTrigger("Attack");
-                }
-                
                 lastAttackTime = Time.time; 
             }
         }
     }
 
-
     IEnumerator AttaqueSynchronisee(Player player)
     {
-        // 1. On lance l'animation
-        anim.SetTrigger("Attack");
+        isAttacking = true;
+        UnityEngine.Debug.Log($"[{gameObject.name}] Coroutine d'attaque lancée");
+        
+        if (anim != null) 
+        {
+            anim.SetTrigger("Attack");
+        }
 
-        // 2. On attend le temps que le bras se tende (ajuste ce chiffre !)
-        yield return new WaitForSeconds(0.9f); 
+        yield return new WaitForSeconds(1f); 
 
-        // 3. On inflige les dégâts
         if (player != null) {
+            UnityEngine.Debug.Log($"[{gameObject.name}] Application des dégâts");
             player.Degats(1);
         }
+        
+        isAttacking = false;
     }
-
 }

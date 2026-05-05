@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
-    public float lifePlayer = 6;
+    public float lifePlayer = 3;
     
     public GameObject GameOver; 
 
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public void Degats(int points)
     {
         lifePlayer -= points;
-        // UnityEngine.Debug.Log(lifePlayer);
+        UnityEngine.Debug.Log($"Dégâts reçus: {points} | Vie restante: {lifePlayer}");
 
         if (lifePlayer <= 0)
         {

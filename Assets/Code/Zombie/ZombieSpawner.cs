@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    public GameObject zombiePrefab; // Le prefab du zombie
-    public float spawnInterval = 4f; // Intervalle de spawn en secondes
-    public Transform spawnPoint; // Point de spawn
+    public GameObject zombiePrefab; 
+    public float spawnInterval = 4f; 
+    public Transform spawnPoint; 
     
     private float nextSpawnTime = 0f;
 
     void Update()
     {
-        // Vérifier si c'est le moment de spawner
         if (Time.time >= nextSpawnTime)
         {
             SpawnZombie();
@@ -26,7 +25,7 @@ public class ZombieSpawner : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.LogError("Veuillez assigner le prefab du zombie et le spawn point!");
+            UnityEngine.Debug.LogError("ERREUR sur : " + gameObject.name + " | Parent : " + transform.parent?.name, gameObject);
         }
     }
 }
