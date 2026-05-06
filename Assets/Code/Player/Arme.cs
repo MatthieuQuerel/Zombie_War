@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Arme : MonoBehaviour
 {
@@ -7,16 +8,24 @@ public class Arme : MonoBehaviour
     public float range = 100f;
     public LayerMask mask;
 
+    public bool FlashArme = false;
+    public ParticleSystem flashEffect;
+    // public GameObject flashObject;
+
     public static int kills = 0;
     private float nextTimeShoot = 0f;
 
     private Camera cam;
+    private AudioSource audioSource;
 
     void Start()
     {
         if (cam == null){
-        cam = GetComponentInParent<Camera>();
-    }
+            cam = GetComponentInParent<Camera>();
+        }
+        if (audioSource == null){
+            audioSource = GetComponent<AudioSource>();
+        }
         //cam = Camera.main;
     }
 
@@ -24,13 +33,19 @@ public class Arme : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && Time.time >= nextTimeShoot)
         {
-            Tirer();
+            StartCoroutine(EffetTir());
             nextTimeShoot = Time.time + timeBetweenShoot;
         }
-    }
+        }
 
     void Tirer()
     {
+
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(audioSource.clip);
+        }
+
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * range, Color.blue, 1f);
@@ -50,5 +65,25 @@ public class Arme : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator EffetTir()
+    {
+        FlashArme = true;
+        
+        // Déclencher le Particle System
+        if (flashEffect != null)
+        {
+            flashEffect.Play();
+        }
+        
+        Tirer();
+        yield return new WaitForSeconds(0.1f);  // Durée du flash
+        
+        if (flashEffect != null)
+        {
+            flashEffect.Stop();
+        }
+        FlashArme = false;
     }
 }
