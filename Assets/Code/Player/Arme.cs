@@ -7,6 +7,7 @@ public class Arme : MonoBehaviour
     public float range = 100f;
     public LayerMask mask;
 
+    public static int kills = 0;
     private float nextTimeShoot = 0f;
 
     private Camera cam;
@@ -43,6 +44,8 @@ public class Arme : MonoBehaviour
                 ZombieAI zombie = hit.collider.GetComponent<ZombieAI>();
                 if (zombie != null)
                 {
+                    UnityEngine.Debug.LogError(kills);
+                    kills++;
                     zombie.killZombie();
                 }
             }

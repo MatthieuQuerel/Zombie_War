@@ -7,13 +7,21 @@ public class Player : MonoBehaviour
     
     public GameObject GameOver; 
 
-    // void Update()
-    // {    
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         Degats(1); 
-    //     }
-    // }
+    public GameObject tabScore; 
+    private bool isVisible = false;
+
+    void Start()
+    {
+        tabScore.SetActive(false);
+    }
+
+    void Update()
+    {    
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleTabScore();
+        }
+    }
 
     // private void OnTriggerEnter(Collider other)
     // { 
@@ -57,5 +65,11 @@ public class Player : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         SceneManager.LoadScene(currentSceneName);
+    }
+
+    void ToggleTabScore()
+    {
+        isVisible = !isVisible; 
+        tabScore.SetActive(isVisible);
     }
 }
