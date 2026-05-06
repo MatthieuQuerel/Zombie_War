@@ -4,10 +4,10 @@ public class Arme : MonoBehaviour
 {
     public float damage = 10f;
     public float timeBetweenShoot = 0.5f;
-    public float range = 100f; 
-    public static int kills = 0;
+    public float range = 100f;
     public LayerMask mask;
 
+    public static int kills = 0;
     private float nextTimeShoot = 0f;
 
     private Camera cam;
@@ -38,11 +38,16 @@ public class Arme : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
            
-            Renderer targetRenderer = hit.transform.GetComponent<Renderer>();
+            Renderer targetRenderer = hit.transform.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {
-                kills++;
-                targetRenderer.material.color = Color.red;
+                ZombieAI zombie = hit.collider.GetComponent<ZombieAI>();
+                if (zombie != null)
+                {
+                    UnityEngine.Debug.LogError(kills);
+                    kills++;
+                    zombie.killZombie();
+                }
             }
         }
     }

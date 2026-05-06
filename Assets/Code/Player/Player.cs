@@ -1,37 +1,46 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public float lifePlayer = 3;
+    
+    public GameObject GameOver; 
+
     public GameObject tabScore; 
     private bool isVisible = false;
-    public GameObject GameOver;
-
 
     void Start()
     {
         tabScore.SetActive(false);
     }
+
     void Update()
-    {
+    {    
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleTabScore();
         }
-    
     }
 
-    private void OnTriggerEnter(Collider other)
-    { 
-        if (other.CompareTag("Zombie"))
-        {
-            Degats(1);
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // { 
+    //     // Vérifie si c'est un zombie qui touche le joueur
+    //     ZombieAI zombie = other.GetComponentInParent<ZombieAI>();
+    //     // UnityEngine.Debug.Log("Le joueur a pas été touché !");
+        
+    //     // // UnityEngine.Debug.Log(zombie);
+    //     if (zombie != null)
+    //     {
+    //         // UnityEngine.Debug.Log("Le joueur a été touché par un zombie !");
+    //         Degats(1);
+    //     }
+    // }
 
-    void Degats(int points)
+    public void Degats(int points)
     {
         lifePlayer -= points;
+        UnityEngine.Debug.Log($"Dégâts reçus: {points} | Vie restante: {lifePlayer}");
 
         if (lifePlayer <= 0)
         {
@@ -48,7 +57,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
 
     }
-
+    
     public void RestartGame()
     {
         Time.timeScale = 1f;
@@ -57,7 +66,8 @@ public class Player : MonoBehaviour
 
         SceneManager.LoadScene(currentSceneName);
     }
-   void ToggleTabScore()
+
+    void ToggleTabScore()
     {
         isVisible = !isVisible; 
         tabScore.SetActive(isVisible);
