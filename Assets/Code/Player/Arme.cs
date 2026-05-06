@@ -4,7 +4,7 @@ public class Arme : MonoBehaviour
 {
     public float damage = 10f;
     public float timeBetweenShoot = 0.5f;
-    public float range = 100f;
+    public float range = 100f; 
     public static int kills = 0;
     public LayerMask mask;
 
