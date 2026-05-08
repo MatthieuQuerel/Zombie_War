@@ -14,6 +14,6 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "Nombre de kills : " + Arme.kills + 
                          "\nNombre de Vies : " + scriptJoueur.lifePlayer;
 
-                         
+                       
     }
 }
